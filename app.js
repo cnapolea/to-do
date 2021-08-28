@@ -33,8 +33,26 @@ app
     .post('/add-task', (req, res, next) => {
         const task = req.body.task;
         
-        task.create({task})
+        Task.create({task})
             .then(()=> {
+                res.redirect('/');
+            })
+            .catch(err => {
+                next(err);
+            });
+    })
+    .post('/delete-task/:id', (req, res, next) => {
+        Task.findByIdAndDelete(req.params.id)
+            .then(() => {
+                res.redirect('/');
+            })
+            .catch(err => {
+                next(err);
+            });
+    })
+    .post('/edit-task/:id', (req, res, next) => {
+        Task.findByIdAndUpdate(req.params.id, {task: req.body.updatedTask})
+        .then((data) => {
                 res.redirect('/');
             })
             .catch(err => {

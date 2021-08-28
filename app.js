@@ -4,7 +4,10 @@ require('dotenv').config();
 const express = require('express'),
     path = require('path'),
     hbs = require('hbs'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    nodeSassMiddleware = require('node-sass-middleware'),
+    serveFavicon = require('serve-favicon'),
+    morgan= require('morgan');
 
 
 const Task = require('./models/tasks');
@@ -13,12 +16,21 @@ const app = express();
 hbs.registerPartials(path.join(__dirname, 'views/partials'));
 
 app
+    .set('view engine', 'hbs')
+    .set('views', path.join(__dirname, 'views'))
     .use(express.urlencoded({
         extended: true
     }))
+    .use(nodeSassMiddleware({
+        dest: path.join(__dirname,'public/stylesheets'),
+        src: path.join(__dirname,'styles'),
+        force: true,
+        outputStyle: 'expanded',
+        prefix:'/stylesheets'
+    }))
     .use(express.static(path.join(__dirname, 'public')))
-    .set('view engine', 'hbs')
-    .set('views', path.join(__dirname, 'views'));
+    .use(serveFavicon(path.join(__dirname, 'public/favicon.ico')))
+    .use(morgan('dev'));
 
 app
     .get('/', (req, res, next) => {

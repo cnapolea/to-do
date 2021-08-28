@@ -4,29 +4,33 @@
         <h1>My To-Do List</h1>
 
         {{#if tasks}}
-            {{#each tasks}}
             <ul class="list-container">
+            {{#each tasks}}
                 <li>
-                    <form action="/edit-task/{{_id}}" method="post" class="update-form">
-                        <input class="update-field" type="text" name="updatedTask" id="updatedTask" value="{{task}}">
+                    <form class="update-form" action="/edit-task/{{_id}}" method="post" class="update-form">
+                        <input id="update-field" class="update-field" type="text" name="updatedTask" id="updatedTask" value="{{task}}" required>
                         <button class="confirm-btn btn">Confirm</button>
                     </form>
 
                     <p class="task">{{task}}</p>
-                    <i class="fas fa-pen update-btn"></i>
+                    <div class="task-btn">
+                        <button>
+                            <i class="fas fa-pen update-btn"></i>
+                        </button>
+                        <form action="/delete-task/{{_id}}" method="post">
+                            <button class="delete-btn"><i class="fas fa-trash"></i></button>
+                        </form>
+                    </div>
 
 
                     <button class="cancel-btn btn">Cancel</button>
 
-                    <form action="/delete-task/{{_id}}" method="post">
-                        <button class="delete-btn"><i class="fas fa-trash"></i></button>
-                    </form>
                 </li>
-            </ul>
             {{/each}}
+            </ul>
         {{/if}}
-        <form action="/add-task" method="post">
-            <input type="text" name="task" id="task" placeholder="Enter to-do task">
+        <form class="add-form" action="/add-task" method="post">
+            <input type="text" name="task" id="task" placeholder="Enter to-do task" required>
             <button>+</button>
         </form>
     </div>

@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const itemsSchema = new mongoose.Schema({
     task: {
         type: String,
-        minlength: 10,
+        minlength: 5,
         maxlength: 60,
         required: true
     // },

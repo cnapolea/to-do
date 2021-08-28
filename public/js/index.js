@@ -1,27 +1,28 @@
 (function (){
+    const taskContainerElement = document.querySelector('.task-btn');
+    const task = document.querySelector('.task');
     const updateBtnElement = document.querySelector('.update-btn');
-    const taskElement = document.querySelector('.task');
-    const updateFieldElement = document.querySelector('.update-field');
-    const confirmBtn = document.querySelector('.confirm-btn');
+    const updateFormElement = document.querySelector('.update-form');
+    const updateFieldElement = document.getElementById('update-field');
     const cancelBtn = document.querySelector('.cancel-btn');
-    const deleteBtn = document.querySelector('.delete-btn');
+    const confirmBtn = document.querySelector('.confirm-btn');
     
     updateBtnElement.addEventListener('click', (e)=> {
-        taskElement.style.display = 'none';
-        deleteBtn.style.display ='none';
-        updateBtnElement.style.display ='none';
-        
-        updateFieldElement.style.display = 'inline-block';
-        confirmBtn.style.display ='inline-block';
-        cancelBtn.style.display ='inline-block';
+        taskContainerElement.style.display = 'none';
+        task.style.display = 'none';
+         
+        updateFormElement.style.display = 'flex';
+        updateFieldElement.focus();
+        cancelBtn.style.display = 'inline-block';
+        confirmBtn.style.display = 'inline-block';
     });
-
+    
     cancelBtn.addEventListener('click', (e)=> {
-        taskElement.style.display = 'inline-block';
-        updateBtnElement.style.display = 'inline-block';
-        deleteBtn.style.display ='inline-block';
-
-        confirmBtn.style.display ='none';
-        cancelBtn.style.display ='none';
+        taskContainerElement.style.display ='flex';
+        task.style.display = 'block';
+        
+        confirmBtn.style.display = 'none';
+        cancelBtn.style.display = 'none';
+        updateFormElement.style.display = 'none';
     });
 }());

@@ -6,6 +6,8 @@ const express = require('express'),
     hbs = require('hbs'),
     mongoose = require('mongoose');
 
+
+const Task = require('./models/tasks');
 const app = express();
 
 hbs.registerPartials(path.join(__dirname, 'views/partials'));
@@ -20,12 +22,29 @@ app
 
 app
     .get('/', (req, res, next) => {
-        res.render('home');
+        Task.find({})
+            .then(tasks => {
+                res.render('home', {tasks});
+            })
+            .catch(err => {
+                next(err);
+            });
     })
-    .post('/', (req, res, next) => {
-        res.render('home');
+    .post('/add-task', (req, res, next) => {
+        const task = req.body.task;
+        
+        task.create({task})
+            .then(()=> {
+                res.redirect('/');
+            })
+            .catch(err => {
+                next(err);
+            });
     });
 
+app.use((err, req, res, next) => {
+    res.render('error');
+});
 
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => {

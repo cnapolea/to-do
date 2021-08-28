@@ -2,17 +2,17 @@
 const mongoose = require('mongoose');
 
 const itemsSchema = new mongoose.Schema({
-    title: {
+    task: {
         type: String,
         minlength: 10,
         maxlength: 60,
         required: true
-    },
-    description: {
-        type: String,
-        minlength: 30,
-        maxlength: 120,
-        default: 'No description.'
+    // },
+    // description: {
+    //     type: String,
+    //     minlength: 30,
+    //     maxlength: 120,
+    //     default: 'No description.'
     }
 }, {
     timestamps: {

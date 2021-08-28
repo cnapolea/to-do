@@ -1,0 +1,13 @@
+<h1>My To-Do List</h1>
+
+{{#if tasks}}
+    <ul>
+        <li>
+            <p>{{task}}</p>
+        </li>
+    </ul>
+{{/if}}
+<form action="/add-task" method="post">
+    <input type="text" name="task" id="task" placeholder="Enter to-do task">
+    <button>+</button>
+</form>

@@ -1,28 +1,35 @@
-(function (){
-    const taskContainerElement = document.querySelector('.task-btn');
-    const task = document.querySelector('.task');
-    const updateBtnElement = document.querySelector('.update-btn');
-    const updateFormElement = document.querySelector('.update-form');
-    const updateFieldElement = document.getElementById('update-field');
-    const cancelBtn = document.querySelector('.cancel-btn');
-    const confirmBtn = document.querySelector('.confirm-btn');
-    
-    updateBtnElement.addEventListener('click', (e)=> {
-        taskContainerElement.style.display = 'none';
-        task.style.display = 'none';
-         
-        updateFormElement.style.display = 'flex';
-        updateFieldElement.focus();
-        cancelBtn.style.display = 'inline-block';
-        confirmBtn.style.display = 'inline-block';
+(function () {
+    const updateBtnElement = document.querySelectorAll('.update-btn');
+    const cancelBtn = document.querySelectorAll('.cancel-btn');
+
+    updateBtnElement.forEach(btn => {
+
+        btn.addEventListener('click', (e) => {
+            console.log(e);
+
+            const listItem = e.target.parentElement.parentElement.parentElement;
+            listItem.children[1].style.display = 'none';
+            listItem.children[2].style.display = 'none';
+
+            listItem.children[0].style.display = 'flex';
+            listItem.children[0].children[1].style.display = 'inline-block';
+            listItem.children[3].style.display = 'inline-block';
+            listItem.children[0].children[0].focus();
+        });
     });
-    
-    cancelBtn.addEventListener('click', (e)=> {
-        taskContainerElement.style.display ='flex';
-        task.style.display = 'block';
-        
-        confirmBtn.style.display = 'none';
-        cancelBtn.style.display = 'none';
-        updateFormElement.style.display = 'none';
+
+    cancelBtn.forEach(btn => {
+        console.log(btn);
+        btn.addEventListener('click', (e) => {
+            const listItem = e.target.parentElement;
+            listItem.children[1].style.display = 'inline-block';
+            listItem.children[2].style.display = 'flex';
+
+            listItem.children[0].style.display = 'none';
+            listItem.children[0].children[1].style.display = 'none';
+            listItem.children[3].style.display = 'none';
+
+        });
     });
+
 }());
